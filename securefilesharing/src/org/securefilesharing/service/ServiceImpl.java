@@ -82,7 +82,7 @@ public class ServiceImpl implements Service {
 	@Override
 	public LoginBean validateUserLogin(LoginBean loginBean) {
 		// TODO Auto-generated method stub
-		return null;
+		return loginBean;
 	}
 
 	/**

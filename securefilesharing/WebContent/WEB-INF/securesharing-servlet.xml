@@ -7,6 +7,10 @@
 						http://www.springframework.org/schema/jee/spring-jee.xsd">
 	
 	<bean name="/signup.view"  class="org.securefilesharing.contoller.SignupContoller" />
+	
+	<bean name="/login.view"  class="org.securefilesharing.contoller.LoginContoller" />
+	
+	<bean name="/logout.view"  class="org.securefilesharing.contoller.LogoutContoller" />
 		
     <bean id="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">

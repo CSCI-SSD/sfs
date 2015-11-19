@@ -18,11 +18,15 @@ public class LoginBean {
 	
 	private String email;
 	
+	private String password;
+	
 	private PrivateKey privateKey;
 	
 	private PublicKey publicKey;
 	
-	private String status; 
+	private String status;
+	
+	private String loginStatus;
 
 	/**
 	 * @return the firstName
@@ -107,5 +111,34 @@ public class LoginBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the loginStatus
+	 */
+	public String getLoginStatus() {
+		return loginStatus;
+	}
+
+	/**
+	 * @param loginStatus the loginStatus to set
+	 */
+	public void setLoginStatus(String loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+	
 	
 }
