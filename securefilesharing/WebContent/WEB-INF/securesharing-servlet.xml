@@ -5,10 +5,30 @@
 						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 						http://www.springframework.org/schema/jee 
 						http://www.springframework.org/schema/jee/spring-jee.xsd">
+						
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close"> 
+        <property name="URL" value="jdbc:oracle:thin:@localhost:1521:xe" /> 
+        <property name="user" value="sfs"/> 
+        <property name="password" value="sfs"/> 
+    </bean>
+    
+    <bean id="secureKeyGenerator" class="org.securefilesharing.util.SecureKeyGenerator">
+	</bean>
 	
-	<bean name="/signup.view"  class="org.securefilesharing.contoller.SignupContoller" />
+    
+    <bean id="service" class="org.securefilesharing.service.ServiceImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+    		
 	
-	<bean name="/login.view"  class="org.securefilesharing.contoller.LoginContoller" />
+	<bean name="/signup.view"  class="org.securefilesharing.contoller.SignupContoller" >
+		<property name="service" ref="service" />
+		<property name="secureKeyGenerator" ref="secureKeyGenerator" />
+	</bean>
+	
+	<bean name="/login.view"  class="org.securefilesharing.contoller.LoginContoller">
+		<property name="service" ref="service" />
+	</bean>
 	
 	<bean name="/logout.view"  class="org.securefilesharing.contoller.LogoutContoller" />
 		

@@ -27,6 +27,8 @@ public class LoginBean {
 	private String status;
 	
 	private String loginStatus;
+	
+	private String message;
 
 	/**
 	 * @return the firstName
@@ -139,6 +141,19 @@ public class LoginBean {
 	public void setLoginStatus(String loginStatus) {
 		this.loginStatus = loginStatus;
 	}
-	
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	
 }

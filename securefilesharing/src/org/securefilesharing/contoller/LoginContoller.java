@@ -41,28 +41,22 @@ public class LoginContoller {
 	@RequestMapping(value = "/login.view", method = RequestMethod.POST)
 	public String login(@ModelAttribute("SpringWeb") LoginBean loginBean, ModelMap model,  HttpServletRequest request, 
 	        HttpServletResponse response) {
-		System.out.println(loginBean.getEmail());
-		System.out.println(loginBean.getPassword());
-		model.addAttribute("login", loginBean);
-		model.addAttribute(loginBean);
-		
-		request.getSession().setAttribute(SecureSharingConstants.LOGIN_BEAN, loginBean);
-		
+		model.addAttribute("login", "yes");
+		loginBean = service.validateUserLogin(loginBean);
+		if(loginBean == null) {
+			model.addAttribute("message", "Unable to Login User");
+			return "login";
+		} else if(SecureSharingConstants.USER_STATUS_VALIDATE.equals(loginBean.getStatus())) {
+			model.addAttribute("message", "User Need To Validate");
+			return "validate";
+		} else if(SecureSharingConstants.USER_STATUS_COMPLETE.equals(loginBean.getStatus())) {
+			request.getSession().setAttribute(SecureSharingConstants.LOGIN_BEAN, loginBean);
+			model.addAttribute(SecureSharingConstants.LOGIN_BEAN, loginBean);
+		}
 		return "main";
 	}
 	
-	private String userCreationProcess(SignupBean signupBean) {
-		
-		if(service.findUserByEmail(signupBean.getEmail())) {
-			
-		} else {
-			secureKeyGenerator.generateRSAKeys(signupBean);
-			return service.createUser(signupBean);
-		}
-		
-		return null;
-	}
-
+	
 	/**
 	 * @return the service
 	 */

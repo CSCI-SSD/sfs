@@ -12,7 +12,7 @@
   <body>
     <div id="header">
 		<h1>Secure File Sharing</h1>
-		<div align="right">${login.email }</div>
+		<div align="right">${LOGIN_BEAN.lastName }</div>
 	</div>
 
 	<div class="menu-form" align="center">
@@ -116,7 +116,7 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/main.js"></script>
-    <div id="footer"> Copyright Â© Capstone 8910 </div>
+    <div id="footer"> Copyright © Capstone 8910 </div>
 	
   </body>
 </html>

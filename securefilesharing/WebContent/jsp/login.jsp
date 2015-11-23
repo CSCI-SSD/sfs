@@ -9,7 +9,28 @@
         <script type="text/javascript">
         	function validate() {
         		var message = "${message}";
+        		if("${register}" == 'yes') {
+        			 $('#signupHeader').addClass('active');
+        			 $('#loginHeader').removeClass('active');
+        			 $('#login').hide();
+        			 $('#signup').show();
+        			 $('#signup').fadeIn(600);
+        			 loadSignUp();
+        			 if (message != '') {
+        				 alert(message);
+        			 }
+        		}
+        	}
+        	
+        	function loadSignUp() {
+        		$('#firstName').val("${signupBean.firstName}");
+        		$('#firstName').prev('label').addClass('active');
         		
+        		$('#lastName').val("${signupBean.lastName}");
+        		$('#lastName').prev('label').addClass('active');
+        		
+        		$('#semail').val("${signupBean.email}");
+        		$('#semail').prev('label').addClass('active');
         	}
         </script>
 	</head>
@@ -22,8 +43,8 @@
 		<div class="form">
       
 			<ul class="tab-group">
-				<li class="tab"><a href="#signup">Sign Up</a></li>
-				<li class="tab active"><a href="#login">Log In</a></li>
+				<li class="tab" id="signupHeader"><a href="#signup">Sign Up</a></li>
+				<li class="tab active" id="loginHeader"><a href="#login">Log In</a></li>
 			</ul>
       
 			<div class="tab-content">
@@ -58,20 +79,20 @@
 						<div class="top-row">
 							<div class="field-wrap">
 								<label> First Name <span class="req">*</span></label>
-								<input name="firstName" type="text" required autocomplete="off" />
+								<input name="firstName" id="firstName" type="text" required autocomplete="off" />
 							</div>
 			
 							<div class="field-wrap">
 							  <label>
 								Last Name<span class="req">*</span>
 							  </label>
-							  <input name="lastName" type="text"required autocomplete="off"/>
+							  <input name="lastName" id="lastName" type="text"required autocomplete="off"/>
 							</div>
 						</div>
 
 						<div class="field-wrap">
 							<label>Email Address<span class="req">*</span></label>
-							<input name="email" type="email"required autocomplete="off"/>
+							<input name="email" id="semail" type="email"required autocomplete="off"/>
 						</div>
 			  
 						<div class="field-wrap">
@@ -82,7 +103,7 @@
 			  
 						<div class="field-wrap">
 							<label>Re-enter Password<span class="req">*</span></label>
-							<input name="repassword" type="password"required autocomplete="off"/>
+							<input name="reenterPassword" type="password"required autocomplete="off"/>
 						</div>
 			  
 						<button type="submit" class="button button-block" onclick="validatePassword();"/>Sign Up</button>

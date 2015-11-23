@@ -35,24 +35,45 @@ public class SignupContoller {
 	}
 
 	@RequestMapping(value = "/signup.view", method = RequestMethod.POST)
-	public String addStudent(@ModelAttribute("SpringWeb") SignupBean signupBean, ModelMap model) {
+	public String addUser(@ModelAttribute("SpringWeb") SignupBean signupBean, ModelMap model) {
 		System.out.println(signupBean.getFirstName());
-		model.addAttribute("message", "message");
-		model.addAttribute(signupBean);
-		
+		model.addAttribute("signupBean", signupBean);
+		model.addAttribute("register", "yes");
+		if (!validatePassword(signupBean)) {
+			model.addAttribute("message", "Please Enter valied password in both password feilds");
+			return "login"; 
+		}
+		String message = userCreationProcess(signupBean);
+		model.addAttribute("message",message);
 		return "login";
 	}
 	
+	private boolean validatePassword(SignupBean signupBean) {
+		if (signupBean.getPassword() == null || signupBean.getReenterPassword() == null ) 
+			return false;
+		else if (signupBean.getPassword() != null && signupBean.getReenterPassword() != null && (!(signupBean.getPassword().length() >= 8) || !signupBean.getPassword().equals(signupBean.getReenterPassword()))) 
+			return false;
+		else 
+			return true;
+	}
+
 	private String userCreationProcess(SignupBean signupBean) {
 		
 		if(service.findUserByEmail(signupBean.getEmail())) {
-			
+			return "User Alredy Registerd";
 		} else {
-			secureKeyGenerator.generateRSAKeys(signupBean);
-			return service.createUser(signupBean);
+			SignupBean signupBean1 = new SignupBean();
+			secureKeyGenerator.generateRSAKeys(signupBean1);
+			if (signupBean1 == null) {
+				return "Unable to create User";
+			} else {
+				signupBean.setPrivateKey(signupBean1.getPrivateKey());
+				signupBean.setPublicKey(signupBean1.getPublicKey());
+				return service.createUser(signupBean);
+			}
+			
 		}
 		
-		return null;
 	}
 
 	/**

@@ -3,6 +3,7 @@
  */
 package org.securefilesharing.beans;
 
+import java.security.Key;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
@@ -20,9 +21,13 @@ public class SignupBean {
 	
 	private String password;
 	
+	private String reenterPassword;
+	
 	private PrivateKey privateKey;
 	
 	private PublicKey publicKey;
+	
+	private Key myKey;
 
 	/**
 	 * @return the firstName
@@ -106,6 +111,34 @@ public class SignupBean {
 	 */
 	public void setPublicKey(PublicKey publicKey) {
 		this.publicKey = publicKey;
+	}
+
+	/**
+	 * @return the reenterPassword
+	 */
+	public String getReenterPassword() {
+		return reenterPassword;
+	}
+
+	/**
+	 * @param reenterPassword the reenterPassword to set
+	 */
+	public void setReenterPassword(String reenterPassword) {
+		this.reenterPassword = reenterPassword;
+	}
+
+	/**
+	 * @return the myKey
+	 */
+	public Key getMyKey() {
+		return myKey;
+	}
+
+	/**
+	 * @param myKey the myKey to set
+	 */
+	public void setMyKey(Key myKey) {
+		this.myKey = myKey;
 	}
 	
 }
