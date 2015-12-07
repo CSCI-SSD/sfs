@@ -30,6 +30,10 @@
 		<property name="service" ref="service" />
 	</bean>
 	
+	<bean name="/upload.view"  class="org.securefilesharing.contoller.FileUploadController">
+		<property name="service" ref="service" />
+	</bean>
+	
 	<bean name="/logout.view"  class="org.securefilesharing.contoller.LogoutContoller" />
 		
     <bean id="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
@@ -39,6 +43,14 @@
         <property name="suffix">
             <value>.jsp</value>
         </property>
+    </bean>
+    
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="1000000000000" />
+ 
     </bean>
     
 </beans>

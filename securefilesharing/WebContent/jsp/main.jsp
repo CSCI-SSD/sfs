@@ -23,9 +23,9 @@
 			
 			<td class="tab" width="14%"><a href="#profile" >Profile</a></td>
 			
-			<td class="tab" width="20%"><a href="#signup" >Secure Sahre</a></td>
+			<td class="tab" width="20%"><a href="#secureShare" >Secure Sahre</a></td>
 			
-			<td class="tab" width="20%"><a href="#signup">Shared With Me</a></td>
+			<td class="tab" width="20%"><a href="#sharedWithMe">Shared With Me</a></td>
 			
 			<td class="tab" width="14%"><a href="#signup">Messages</a></td>
 			
@@ -41,11 +41,12 @@
 		 
 		 <div id="Upload">   
           <h1>Upload File</h1>
-          <form action="/" method="post">
+          
+          <form action="upload.view" method="post" enctype="multipart/form-data" > 
              <table align="center">
 				<tr>
 					<td><label>Browse<span class="req">*</span></label> </td>
-					<td><input name="fileName" type="file" required autocomplete="off" /></td>
+					<td><input type="file" name="file" required autocomplete="off" /></td>
 				</tr>
 				
 				 <tr>
@@ -92,7 +93,41 @@
           </form>
 		  <br><br><br>
         </div>
+        
+        <div id="secureShare">   
+        	<br>
+             <table align="center"  border="1" width="100%">
+				<tr>
+					<td class="colHeder"><label>File Name</label> </td>
+					<td class="colHeder"><label>Shared With</label></td>
+					 <td class="colHeder"><label>Add</label></td>
+					<td class="colHeder"><label>Delete user</label></td>
+					<td class="colHeder"><label>Delete File</label></td>
+				 </tr>
+				 <tr>
+					<td><label>Staples.pdf</label> </td>
+					<td><label>kpuchakaya@unomaha.edu<br></label></td>
+					 <td><label>Add</label></td>
+					<td><label>Delete</label></td>
+					<td><label>Delete</label></td>
+				 </tr>
+			</table>
+        </div>
 		
+		  <div id="sharedWithMe">   
+        	<br>
+             <table align="center"  border="1" width="100%">
+				<tr>
+					<td class="colHeder"><label>File Name</label> </td>
+					<td class="colHeder"><label>Shared By</label></td>
+				 </tr>
+				 <tr>
+					<td><label>Staples.pdf</label> </td>
+					<td><label>kpuchakaya@unomaha.edu<br></label></td>
+					 
+				 </tr>
+			</table>
+        </div>
 		
 		
 		
@@ -110,8 +145,6 @@
 		
 	 </div>
 	</div>
-   
-    <div id="footer"> Copyright © Capstone 8910 </div>
 	
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 

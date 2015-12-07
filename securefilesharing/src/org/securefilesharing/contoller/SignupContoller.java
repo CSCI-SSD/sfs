@@ -69,6 +69,8 @@ public class SignupContoller {
 			} else {
 				signupBean.setPrivateKey(signupBean1.getPrivateKey());
 				signupBean.setPublicKey(signupBean1.getPublicKey());
+				signupBean.setAesKey(signupBean1.getAesKey());
+				signupBean.setAeskeySpec(signupBean1.getAeskeySpec());
 				return service.createUser(signupBean);
 			}
 			

@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
 
 import org.securefilesharing.beans.LoginBean;
@@ -105,7 +106,7 @@ public class ServiceImpl implements Service {
 			try {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				ObjectOutputStream oos = new ObjectOutputStream(baos);
-				oos.writeObject(signupBean.getMyKey());
+				oos.writeObject(signupBean.getAeskeySpec());
 				oos.flush();
 				oos.close();
 				preparedStatement.setBinaryStream(8, new ByteArrayInputStream(baos.toByteArray()));
@@ -180,6 +181,20 @@ public class ServiceImpl implements Service {
 						e.printStackTrace();
 					}
 				    
+				    try {
+				    	byte[] byteSt = (byte[]) resultSet.getBlob("SECUREKEY").getBytes(1,(int)resultSet.getBlob("SECUREKEY").length());
+					    ByteArrayInputStream baip = new ByteArrayInputStream(byteSt);
+						ObjectInputStream ois = new ObjectInputStream(baip);
+						loginBean.setAeskeySpec((SecretKeySpec) ois.readObject());
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				    
 					
 					
 					return loginBean;
@@ -237,6 +252,35 @@ public class ServiceImpl implements Service {
 				return "Created User";
 			} else {
 				return "Unable to Create User";
+			}
+		} catch (SQLException sqlException) {
+			return "";
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public String uploadFile(String fileName, String email) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement("INSERT INTO DOCUMENTS (FILENAME, USERNAME) VALUES (?,?) ");
+			preparedStatement.setString(1, fileName);
+			preparedStatement.setString(2, email);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.last();
+			if(resultSet.getRow() == 1) {
+				return "File Inserted";
+			} else {
+				return "Unable to insert row";
 			}
 		} catch (SQLException sqlException) {
 			return "";

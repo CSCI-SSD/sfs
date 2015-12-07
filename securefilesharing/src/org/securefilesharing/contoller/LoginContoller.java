@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.securefilesharing.beans.LoginBean;
-import org.securefilesharing.beans.SignupBean;
 import org.securefilesharing.service.Service;
 import org.securefilesharing.util.SecureKeyGenerator;
 import org.securefilesharing.util.SecureSharingConstants;

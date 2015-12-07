@@ -6,6 +6,8 @@ package org.securefilesharing.beans;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import javax.crypto.spec.SecretKeySpec;
+
 /**
  * @author puchakayalak
  *
@@ -23,6 +25,8 @@ public class LoginBean {
 	private PrivateKey privateKey;
 	
 	private PublicKey publicKey;
+	
+	private SecretKeySpec aeskeySpec;
 	
 	private String status;
 	
@@ -154,6 +158,20 @@ public class LoginBean {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	/**
+	 * @return the aeskeySpec
+	 */
+	public SecretKeySpec getAeskeySpec() {
+		return aeskeySpec;
+	}
+
+	/**
+	 * @param aeskeySpec the aeskeySpec to set
+	 */
+	public void setAeskeySpec(SecretKeySpec aeskeySpec) {
+		this.aeskeySpec = aeskeySpec;
 	}
 	
 }

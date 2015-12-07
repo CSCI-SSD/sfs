@@ -7,6 +7,8 @@ import java.security.Key;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import javax.crypto.spec.SecretKeySpec;
+
 /**
  * @author puchakayalak
  *
@@ -27,7 +29,9 @@ public class SignupBean {
 	
 	private PublicKey publicKey;
 	
-	private Key myKey;
+	private byte[] aesKey;
+	
+	private SecretKeySpec aeskeySpec;
 
 	/**
 	 * @return the firstName
@@ -128,17 +132,31 @@ public class SignupBean {
 	}
 
 	/**
-	 * @return the myKey
+	 * @return the aesKey
 	 */
-	public Key getMyKey() {
-		return myKey;
+	public byte[] getAesKey() {
+		return aesKey;
 	}
 
 	/**
-	 * @param myKey the myKey to set
+	 * @param aesKey the aesKey to set
 	 */
-	public void setMyKey(Key myKey) {
-		this.myKey = myKey;
+	public void setAesKey(byte[] aesKey) {
+		this.aesKey = aesKey;
+	}
+
+	/**
+	 * @return the aeskeySpec
+	 */
+	public SecretKeySpec getAeskeySpec() {
+		return aeskeySpec;
+	}
+
+	/**
+	 * @param aeskeySpec the aeskeySpec to set
+	 */
+	public void setAeskeySpec(SecretKeySpec aeskeySpec) {
+		this.aeskeySpec = aeskeySpec;
 	}
 	
 }
