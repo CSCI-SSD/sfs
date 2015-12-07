@@ -126,7 +126,7 @@
 					<td><label>Delete</label></td>
 					<td><label>Delete</label></td>
 				 </tr>
-				 <c:forEach var="document" items="${doclist}">
+				 <c:forEach var="document" items="${FileList}">
 					<c:set var="count" value="${count+1}"/>
 					<c:choose>
 						<c:when test="${count % 2 == 0}">
