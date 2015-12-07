@@ -295,4 +295,33 @@ public class ServiceImpl implements Service {
 		}
 	}
 	
+	@Override
+	public DoumentList getFileList(String email) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement("Select * from  DOCUMENTS where  USERNAME = ?");
+			preparedStatement.setString(1, email);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			DoumentList doumentList = new DoumentList();
+			while(resultSet.next()) {
+				Documents documents = new Documents();
+				documents.setFileName(resultSet.getString("FILENAME"));
+				doumentList.addDocument(documents);
+			}
+			return doumentList;
+		} catch (SQLException sqlException) {
+			return null;
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 }
