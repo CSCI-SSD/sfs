@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html >
   <head>
     <meta charset="UTF-8">
@@ -111,6 +112,23 @@
 					<td><label>Delete</label></td>
 					<td><label>Delete</label></td>
 				 </tr>
+				 <c:forEach var="document" items="${doclist}">
+					<c:set var="count" value="${count+1}"/>
+					<c:choose>
+						<c:when test="${count % 2 == 0}">
+							<tr class="even" id="row<c:out value='${count}'/>">
+						</c:when>
+						<c:otherwise>
+							<tr class="odd" id="row<c:out value='${count}'/>">
+						</c:otherwise>
+					</c:choose>
+						<td><span id="typeofcrime${count}"><c:out value="${document.fileName}"/></span></td>
+						<td><span id="crimedate${count}"><c:out value="${document.sharedWith}"/></span></td>
+						<td>Add</td>
+						<td>Delete</td>
+						<td>Delete</td>
+					</tr>
+				</c:forEach>
 			</table>
         </div>
 		
@@ -149,7 +167,7 @@
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/js/main.js"></script>
-    <div id="footer"> Copyright © Capstone 8910 </div>
+    <div id="footer"> Copyright Â© Capstone 8910 </div>
 	
   </body>
 </html>
