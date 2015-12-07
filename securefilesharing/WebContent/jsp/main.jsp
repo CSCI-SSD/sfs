@@ -7,10 +7,24 @@
     <title>Home Page</title>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-	
+     <script type="text/javascript">
+        	function validate() {
+        		var message = "${message}";
+        		if("${view}" == 'secureshare') {
+        			 $('#securesharelink').addClass('active');
+        			 $('#secureShare').show();
+        			 $('#secureShare').fadeIn(600);
+        			 if (message != '') {
+        				 alert(message);
+        			 }
+        		}
+        	}
+        	
+        	
+        </script>	
   </head>
 
-  <body>
+  <body onload="validate()">
     <div id="header">
 		<h1>Secure File Sharing</h1>
 		<div align="right">${LOGIN_BEAN.lastName }</div>
@@ -20,11 +34,11 @@
 		<table class="tab-menu-group" width="98%">
 		<tr>
 			
-			<td class="tab active" width="14%"><a href="#Upload" >Upload</a></td>
+			<td class="tab" width="14%"><a href="#Upload" >Upload</a></td>
 			
 			<td class="tab" width="14%"><a href="#profile" >Profile</a></td>
 			
-			<td class="tab" width="20%"><a href="secureshare.view" >Secure Sahre</a></td>
+			<td class="tab" width="20%" id="securesharelink"><a href="secureshare.view" >Secure Sahre</a></td>
 			
 			<td class="tab" width="20%"><a href="#sharedWithMe">Shared With Me</a></td>
 			
