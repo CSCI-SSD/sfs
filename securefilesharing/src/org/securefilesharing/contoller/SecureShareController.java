@@ -6,16 +6,15 @@ package org.securefilesharing.contoller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.securefilesharing.beans.DoumentList;
 import org.securefilesharing.beans.LoginBean;
 import org.securefilesharing.service.Service;
 import org.securefilesharing.util.SecureKeyGenerator;
 import org.securefilesharing.util.SecureSharingConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author puchakayalak
@@ -32,26 +31,22 @@ public class SecureShareController {
 	
 	private SecureKeyGenerator secureKeyGenerator;
 
-	@RequestMapping(value = "/login.view", method = RequestMethod.GET)
-	public ModelAndView student() {
-		return new ModelAndView("login", "command", new LoginBean());
-	}
+	
 
-	@RequestMapping(value = "/login.view", method = RequestMethod.POST)
-	public String login(@ModelAttribute("SpringWeb") LoginBean loginBean, ModelMap model,  HttpServletRequest request, 
+	@RequestMapping(value = "/secureshare.view", method = RequestMethod.POST)
+	public String viewlist(ModelMap model,  HttpServletRequest request, 
 	        HttpServletResponse response) {
-		model.addAttribute("login", "yes");
-		loginBean = service.validateUserLogin(loginBean);
+		
+		LoginBean loginBean =  (request.getSession().getAttribute(SecureSharingConstants.LOGIN_BEAN) != null ?  (LoginBean) request.getSession().getAttribute(SecureSharingConstants.LOGIN_BEAN) : null);
+		
 		if(loginBean == null) {
-			model.addAttribute("message", "Unable to Login User");
+			model.addAttribute("message", "Please login");
 			return "login";
-		} else if(SecureSharingConstants.USER_STATUS_VALIDATE.equals(loginBean.getStatus())) {
-			model.addAttribute("message", "User Need To Validate");
-			return "validate";
-		} else if(SecureSharingConstants.USER_STATUS_COMPLETE.equals(loginBean.getStatus())) {
-			request.getSession().setAttribute(SecureSharingConstants.LOGIN_BEAN, loginBean);
-			model.addAttribute(SecureSharingConstants.LOGIN_BEAN, loginBean);
-		}
+		}	
+		
+		DoumentList doclist = service.getFileList(loginBean.getEmail());
+		model.addAttribute("FileList", doclist);
+		model.addAttribute("view", "secureshare");
 		return "main";
 	}
 	
