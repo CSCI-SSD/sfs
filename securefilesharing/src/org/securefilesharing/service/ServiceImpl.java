@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
 
+import org.securefilesharing.beans.Documents;
+import org.securefilesharing.beans.DoumentList;
 import org.securefilesharing.beans.LoginBean;
 import org.securefilesharing.beans.SignupBean;
 import org.securefilesharing.util.SecureSharingConstants;

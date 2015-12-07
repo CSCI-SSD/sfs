@@ -33,7 +33,7 @@ public class SecureShareController {
 
 	
 
-	@RequestMapping(value = "/secureshare.view", method = RequestMethod.POST)
+	@RequestMapping(value = "/secureshare.view", method = RequestMethod.GET)
 	public String viewlist(ModelMap model,  HttpServletRequest request, 
 	        HttpServletResponse response) {
 		

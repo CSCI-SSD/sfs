@@ -34,6 +34,10 @@
 		<property name="service" ref="service" />
 	</bean>
 	
+	<bean name="/secureshare.view"  class="org.securefilesharing.contoller.SecureShareController">
+		<property name="service" ref="service" />
+	</bean>
+	
 	<bean name="/logout.view"  class="org.securefilesharing.contoller.LogoutContoller" />
 		
     <bean id="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

@@ -24,7 +24,7 @@
 			
 			<td class="tab" width="14%"><a href="#profile" >Profile</a></td>
 			
-			<td class="tab" width="20%"><a href="#secureShare" >Secure Sahre</a></td>
+			<td class="tab" width="20%"><a href="secureshare.view" >Secure Sahre</a></td>
 			
 			<td class="tab" width="20%"><a href="#sharedWithMe">Shared With Me</a></td>
 			
