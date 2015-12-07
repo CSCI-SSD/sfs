@@ -14,4 +14,6 @@ public interface Service {
 	public LoginBean validateUserLogin(LoginBean loginBean);
 
 	public String uploadFile(String fileName, String email);
+	
+	public DoumentList getFileList(String email);
 }
